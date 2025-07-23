@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Coffee Order</title>
+	
+</head>
+<body>
+<script type="text/javascript">
+	//First Part 
+	const validUsers={
+		admin:{password:"1234",role:"admin",securityLevel:"high"},
+		user:{password:"1234",role:"user",securityLevel:"low"}
+	};
+	const userName=prompt("Enter User Name(admin or user):");
+	const password=prompt("Enter password:");
+
+	if (validUsers[userName] && validUsers[userName].password===password){
+		const userRole=validUsers[userName].role;
+		const securityLevel=validUsers[userName].securityLevel;
+
+		alert(`Access granted.\nRole:${userRole}\n securityLevel:${securityLevel}`);
+
+	
+		// consol.log("User role:",userRole);
+		// consol.log("security Level:",securityLevel);
+	}
+	else{
+		alert("Invalid data.You cant Access");
+		throw new Error("Terminatin gprogram due to faild login");
+	}
+
+	//Second Part
+	//  Coffee Shop Order and Calculator
+
+let customerName = prompt("What's your name?");
+let age = parseInt(prompt("How old are you?"));
+let coffeeType = prompt("Which coffee would you like? (espresso, latte, cappuccino)").toLowerCase();
+let quantity = parseInt(prompt("How many cups would you like?"));
+
+
+let coffeePrices = {
+    espresso: 2.5,
+    latte: 3.5,
+    cappuccino: 4.0
+};
+
+if (coffeePrices.hasOwnProperty(coffeeType) && !isNaN(quantity) && quantity > 0) {
+    let pricePerCup = coffeePrices[coffeeType];
+    let originalTotal = pricePerCup * quantity;
+
+    
+    let discountRate = (age < 18 || age > 60) ? 0.10 : 0.0;
+    let discountAmount = originalTotal * discountRate;
+    let finalTotal = originalTotal - discountAmount;
+
+    alert(
+       ` 🧾 Order Summary for ${customerName}:\n` +
+        `Age: ${age}\n` +
+        `Coffee: ${coffeeType} x ${quantity}\n` +
+       ` Original Total: $${originalTotal.toFixed(2)}\n` +
+        `Discount: $${discountAmount.toFixed(2)}\n` +
+        `Final Total: $${finalTotal.toFixed(2)}`);
+} else {
+    alert("❌ Invalid input. Please make sure the coffee type is valid and quantity is a positive number.");
+}
+
+//Third Part
+// Bill Splitter with Tip
+
+let people = parseInt(prompt("How many people are splitting the bill? (1, 2, or 3)"));
+let tipPercent = parseInt(prompt("Enter tip percentage (0, 5, 10, or 15):"));
+let finalTotal = 20.00; 
+
+if ([1, 2, 3].includes(people) && [0, 5, 10, 15].includes(tipPercent)) {
+    let tipAmount = finalTotal * (tipPercent / 100);
+    let totalWithTip = finalTotal + tipAmount;
+    let perPerson = totalWithTip / people;
+
+    alert(
+        `🧾 Bill Split Summary:\n` +
+        `People: ${people}\n` +
+        `Tip: ${tipPercent}%\n` +
+        `Tip Amount: $${tipAmount.toFixed(2)}\n` +
+        `Total with Tip: $${totalWithTip.toFixed(2)}\n` +
+        `Each Person Pays: $${perPerson.toFixed(2)}`
+    );
+} else {
+    alert("❌ Invalid input. Please enter 1, 2, or 3 for people and 0, 5, 10, or 15 for tip.");
+}
+
+// alert(
+// `Hello ${people}\n`+
+// `You Orderd ${quantity} of ${coffeeType}\n`+
+// `Original Total $${originalTotal}\n`+
+// `Dicount $${discountAmount}\n`+
+// `Tip $${tipPercent}%\n`+
+// `Total With Tip $${totalWithTip.toFixed(2)}\n`+
+// `Split between 3 people is $${perPerson.toFixed(2)}`
+
+// 	)
+
+</script>
+</body>
+</html>
